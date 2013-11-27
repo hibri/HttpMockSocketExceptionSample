@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System.Net;
+using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects;
 using HttpMock;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,8 +14,9 @@ namespace HttpMockSocketExceptionSample
         [TestMethod]
         public void Index_WhenHttpIsStubbed_ReturnStubbedValue()
         {
-            stubHttp = HttpMockRepository.At("http://localhost:5009");
+            stubHttp = HttpMockRepository.At("http://localhost:9009");
             stubHttp.Stub(x => x.Get("/Stub")).Return("I AM A STUB").OK();
+
 
             var page = Host.Instance.NavigateToInitialPage<Page>("/");
 
